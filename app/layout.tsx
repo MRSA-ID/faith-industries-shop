@@ -2,7 +2,7 @@ import { Flowbite, ThemeModeScript } from "flowbite-react";
 import { Inter } from "next/font/google";
 import { type FC, type PropsWithChildren } from "react";
 import { twMerge } from "tailwind-merge";
-// import "./globals.css";
+import "./globals.css";
 import { flowbiteTheme } from "./theme";
 
 const inter = Inter({ subsets: ["latin"] });

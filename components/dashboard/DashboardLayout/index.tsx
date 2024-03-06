@@ -4,6 +4,7 @@ import type { FC, PropsWithChildren } from "react";
 import { twMerge } from "tailwind-merge";
 import { DashboardSidebar } from "../DashboardSidebar";
 import { DashboardNavbar } from "../DashboardNavbar";
+import Head from "next/head";
 
 const DashboardLayout: FC<PropsWithChildren> = function({children}) {
   return (
@@ -17,6 +18,9 @@ const DashboardLayoutContent: FC<PropsWithChildren> = function({children}) {
   const { isCollapsed } = useSidebarContext();
   return (
     <>
+      <Head>
+        <title>Stock Product | FTH Product</title>
+      </Head>
       <DashboardNavbar />
       <div className="mt-16 flex items-start">
         <DashboardSidebar />

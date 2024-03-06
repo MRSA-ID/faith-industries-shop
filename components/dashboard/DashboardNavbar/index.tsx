@@ -1,6 +1,7 @@
+import { AvatarExample } from "@/components/content";
 import { useSidebarContext } from "@/context/SidebarContext";
 import { isSmallScreen } from "@/helpers/is-small-screen";
-import { DarkThemeToggle, Navbar } from "flowbite-react";
+import { DarkThemeToggle, Navbar, Tooltip } from "flowbite-react";
 import Image from "next/image";
 import type { FC } from "react";
 import { HiMenuAlt1, HiX } from "react-icons/hi";
@@ -38,11 +39,16 @@ export const DashboardNavbar: FC<Record<string, never>> = function () {
                   width="24"
                 /> */}
                 <span className="self-center whitespace-nowrap px-3 text-xl font-semibold dark:text-white">
-                  Flowbite
+                  Faith Industries
                 </span>
               </Navbar.Brand>
             </div>
-            <DarkThemeToggle />
+            <div className="flex gap-2.5">
+              <Tooltip content="Toggle dark mode">
+                <DarkThemeToggle />
+              </Tooltip>
+              <AvatarExample />
+            </div>
           </div>
         </div>
       </Navbar>

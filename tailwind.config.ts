@@ -2,7 +2,12 @@ import flowbite from "flowbite/plugin";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-  content: ["./app/**/*.{ts,tsx}", "./node_modules/flowbite-react/lib/**/*.js"],
+  content: [
+    "./pages/**/*.{ts,tsx}", 
+    "./components/**/*.{ts,tsx}", 
+    "./node_modules/flowbite-react/lib/**/*.js",
+    "./@/**/*.{ts,tsx}"
+  ],
   theme: {
     extend: {
       colors: {

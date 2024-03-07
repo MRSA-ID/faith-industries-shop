@@ -6,7 +6,7 @@ const DashboardLayout = dynamic(() => import('@/components/dashboard/DashboardLa
 
 const Page = () => {
   return (
-    <div className='w-full h-screen px-5 py-7 overflow-y-hidden'>
+    <div className='w-full h-screen overflow-y-hidden'>
       <HomePageContent />
     </div>
   )

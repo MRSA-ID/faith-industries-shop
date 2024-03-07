@@ -1,11 +1,13 @@
 "use client";
 
 import { useState, type FC, useEffect } from "react";
-import { Sidebar, Button } from "flowbite-react";
+import { Sidebar, Button, SidebarItem } from "flowbite-react";
 import { BiBuoy } from "react-icons/bi";
 import {
   HiArrowSmRight,
   HiChartPie,
+  HiChevronDown,
+  HiChevronUp,
   HiInbox,
   HiShoppingBag,
   HiTable,
@@ -14,11 +16,20 @@ import {
 } from "react-icons/hi";
 import { twMerge } from "tailwind-merge";
 import { useSidebarContext } from "@/context/SidebarContext";
+import { itemSidebarType } from "@/ts/types/components/dashboard/DashboardSidebar.type";
+import { DashboardSidebarItem } from "../DashboardSidebarItem";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
+interface propsSidebar {
+  pathname: string;
+  items: itemSidebarType[]
+}
 
-export const DashboardSidebar: FC = function(){
+export const DashboardSidebar: FC<propsSidebar> = function({pathname, items}: propsSidebar){
   const { isCollapsed } = useSidebarContext();
-
+  
+  const router = useRouter()
   return (
     <Sidebar
       aria-label="Default sidebar example"
@@ -31,12 +42,11 @@ export const DashboardSidebar: FC = function(){
     >
       <Sidebar.Items>
         <Sidebar.ItemGroup>
-          <Sidebar.Item href="" icon={HiChartPie} >
-            Dashboard
-          </Sidebar.Item>
-          <Sidebar.Item href="#" icon={HiArrowSmRight}>
-            Sign In
-          </Sidebar.Item>
+          {
+            items.map((item, index) => 
+              <DashboardSidebarItem item={item} pathname={pathname} key={index}/>
+            )
+          }
         </Sidebar.ItemGroup>
       </Sidebar.Items>
     </Sidebar>

@@ -408,7 +408,7 @@ interface srcImageProps {
   alt?: string;
 }
 
-export const AvatarExample: FC<srcImageProps> = function ({srcImage = "/profile-picture-5.jpg", alt = "avatar of Jese"} :srcImageProps) {
+export const AvatarExample: FC<srcImageProps> = function ({srcImage = "/images/profile-picture-5.jpg", alt = "avatar of Jese"} :srcImageProps) {
   return <Avatar bordered img={srcImage} alt={alt} rounded />;
 };
 

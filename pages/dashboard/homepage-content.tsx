@@ -193,6 +193,107 @@ const dataSeriesUsers = [
   },
 ]
 
+const optionsChartAge = {
+  chart: {
+    id: "week-signup-chart",
+    toolbar: {
+      show: false,
+    },
+  },
+  plotOptions: {
+    bar: {
+      // background: '#fff',
+      horizontal: true,
+      // columnWidth: '10%',
+      barHeight: '25%',
+      borderRadiusApplication: "around" as any,
+      borderRadius: 3,
+      colors:{
+        backgroundBarColors:['#374151'],
+        backgroundBarOpacity: 1,
+        backgroundBarRadius: 3
+      }
+    },
+  },
+  tooltip: {
+    shared: true,
+    intersect: false,
+    style: {
+      fontFamily: "Inter, sans-serif",
+    },
+  },
+  states: {
+    hover: {
+      filter: {
+        type: "darken",
+        value: 1,
+      },
+    },
+  },
+  stroke: {
+    show: true,
+    width: 0,
+    colors: ["transparent"],
+  },
+  grid: {
+    show: false,
+    strokeDashArray: 2,
+    padding: {
+      left: 25,
+      right: 25,
+      top: -14,
+      bottom: 14
+    },
+  },
+  dataLabels: {
+    enabled: false,
+  },
+  legend: {
+    show: false,
+  },
+  xaxis: {
+    floating: true,
+    labels: {
+      show: false,
+      style: {
+        fontFamily: "Inter, sans-serif",
+        fontWeight: 700,
+        cssClass: 'text-xs  fill-gray-500 dark:fill-gray-400'
+      }
+    },
+    axisBorder: {
+      show: false,
+    },
+    axisTicks: {
+      show: false,
+    },
+  },
+  yaxis: {
+    show: true,
+    labels: {
+      style: {
+        fontFamily: "Inter, sans-serif",
+        cssClass: 'text-base font-bold fill-gray-500 dark:fill-white'
+      }
+    },
+  },
+  fill: {
+    opacity: 1,
+  },
+}
+const dataSeriesAge = [
+  {
+    name: "People",
+    color: "#1A56DB",
+    data: [
+      { x: "Age 50 +", y: 1334 },
+      { x: "Age 40 +", y: 2435 },
+      { x: "Age 30 +", y: 1753 },
+      { x: "Age 20 +", y: 1328 },
+    ],
+  },
+]
+
 const HomePageContent:NextPage = function () {
   return (
     <>
@@ -204,8 +305,8 @@ const HomePageContent:NextPage = function () {
       </header>
     </section> */}
     <div className="p-4">
-      <div className="grid grid-cols-3 gap-4 mb-4">
-        <Card className="col-span-2 ">
+      <div className="grid gap-4  xl:grid-cols-2 2xl:grid-cols-3 mb-4">
+        <Card className="2xl:col-span-2 h-[600px]">
           <ChartComponent />
         </Card>
         <Card className="max-w-full">
@@ -358,9 +459,17 @@ const HomePageContent:NextPage = function () {
             className="w-full"
           />
         </div>
-        <div className="flex items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-
-        </div>
+        {/* <div className="flex flex-col items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+          <h3 className="text-base self-start font-normal text-gray-500 dark:text-gray-400">
+            Audience by age
+          </h3>
+        </div> */}
+        <Card>
+          <ChartComponent 
+            options={optionsChartAge} 
+            series={dataSeriesAge} 
+          />
+        </Card>
       </div>
     </div>
     {/* <div className="h-full w-full">

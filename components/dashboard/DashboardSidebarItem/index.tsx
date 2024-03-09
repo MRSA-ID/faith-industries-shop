@@ -20,6 +20,7 @@ export const DashboardSidebarItem: FC<propsSidebarItem> = ({pathname, item}: pro
       <Sidebar.Collapse 
         icon={item.icon} 
         label="E-commerce"
+        className="mb-1.5"
         open ={ isActive && item.sub?.some(subItem => subItem.path === pathname) }
         renderChevronIcon={ (_, open) => {
           if (open) return <HiChevronUp className="text-xl"/>
@@ -32,7 +33,7 @@ export const DashboardSidebarItem: FC<propsSidebarItem> = ({pathname, item}: pro
               key={index}
               active={isActive && subItem.path === pathname}
               onClick={() => router.push(subItem.path)}
-              className='cursor-pointer'
+              className='cursor-pointer mb-1.5'
             >
               {subItem.title}
             </Sidebar.Item>
@@ -48,7 +49,7 @@ export const DashboardSidebarItem: FC<propsSidebarItem> = ({pathname, item}: pro
           icon={item.icon}
           active={isActive}
           onClick={() => router.push(item.path)}
-          className='cursor-pointer' 
+          className='cursor-pointer mb-1.5' 
         >
           {item.title}
         </Sidebar.Item>

@@ -16,7 +16,7 @@ export const DashboardNavbar: FC<Record<string, never>> = function () {
         fluid
         className="fixed top-0 z-30 w-full border-b border-gray-200 bg-white p-0 dark:border-gray-700 dark:bg-gray-800 sm:p-0"
       >
-        <div className="w-full p-3 pr-4">
+        <div className="w-full p-3 pr-8">
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <button

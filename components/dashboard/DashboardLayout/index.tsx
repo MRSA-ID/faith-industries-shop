@@ -16,6 +16,7 @@ import {
   HiUser,
   HiViewBoards,
 } from "react-icons/hi";
+import { DashboardFooter } from "../DashboardFooter";
 
 
 
@@ -76,6 +77,7 @@ const DashboardLayoutContent: FC<PropsWithChildren> = function({children}) {
           {children}     
         </div>
       </div>
+      <DashboardFooter />
     </>
   )
 }

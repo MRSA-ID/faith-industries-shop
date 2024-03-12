@@ -75,14 +75,14 @@ const Products = () => {
           <Table className='w-full px-20 relative mb-5' hoverable>
           {/* hidden md:table-row-group */}
             <Table.Head className='text-gray-500 hidden md:table-row-group' >
-              <Table.HeadCell className="bg-gray-200 dark:bg-gray-700 p-4">
+              <Table.HeadCell className="bg-gray-100 dark:bg-gray-700 p-4">
                 <Checkbox className='checked:text-blue-600 focus:ring-blue-300 dark:focus:ring-blue-600' />
               </Table.HeadCell>
-              <Table.HeadCell className='bg-gray-200 dark:bg-gray-700'>Product name</Table.HeadCell>
-              <Table.HeadCell className='bg-gray-200 dark:bg-gray-700'>Color</Table.HeadCell>
-              <Table.HeadCell className='bg-gray-200 dark:bg-gray-700'>Category</Table.HeadCell>
-              <Table.HeadCell className='bg-gray-200 dark:bg-gray-700'>Price</Table.HeadCell>
-              <Table.HeadCell className='bg-gray-200 dark:bg-gray-700'>
+              <Table.HeadCell className='bg-gray-100 dark:bg-gray-700'>Product name</Table.HeadCell>
+              <Table.HeadCell className='bg-gray-100 dark:bg-gray-700'>Color</Table.HeadCell>
+              <Table.HeadCell className='bg-gray-100 dark:bg-gray-700'>Category</Table.HeadCell>
+              <Table.HeadCell className='bg-gray-100 dark:bg-gray-700'>Price</Table.HeadCell>
+              <Table.HeadCell className='bg-gray-100 dark:bg-gray-700'>
                 <span className="sr-only">Edit</span>
               </Table.HeadCell>
             </Table.Head>

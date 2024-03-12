@@ -87,7 +87,7 @@ const Products = () => {
               </Table.HeadCell>
             </Table.Head>
             <Table.Body className="divide-y w-full ">
-              <Table.Row className="bg-white block mb-20 rounded-xl md:table-row dark:border-gray-700 dark:bg-gray-800">
+              <Table.Row className="bg-white shadow-md md:shadow-none block mb-5 rounded-xl md:table-row dark:border-gray-700 dark:bg-gray-800">
                 <Table.Cell className="p-4 md:table-cell">
                   <Checkbox className='checked:text-blue-600 focus:ring-blue-300 dark:focus:ring-blue-600' />
                 </Table.Cell>

@@ -4,10 +4,14 @@ import Head from 'next/head'
 import { Breadcrumb, Button, Checkbox, Table } from 'flowbite-react'
 import { HiHome, HiOutlinePlusSm, HiOutlineRefresh } from 'react-icons/hi'
 import Link from 'next/link'
+import DashboardPagination from '@/components/dashboard/DashboardPagination'
 // import DashboardLayout from '@/components/dashboard/DashboardLayout'
 const DashboardLayout = dynamic(() => import('@/components/dashboard/DashboardLayout'), { ssr: false })
 
 const Products = () => {
+  const handlePageClick = (page:number) => {
+    console.log('page number:', page)
+  }
   return (
     <div className='w-full h-screen px-5 py-7 overflow-y-hidden'>
       <Head>
@@ -68,7 +72,7 @@ const Products = () => {
 
         </div>
         <div className="w-full">
-          <Table className='w-full px-20 relative' hoverable>
+          <Table className='w-full px-20 relative mb-5' hoverable>
           {/* hidden md:table-row-group */}
             <Table.Head className='text-gray-500 hidden md:table-row-group' >
               <Table.HeadCell className="bg-gray-200 dark:bg-gray-700 p-4">
@@ -87,7 +91,7 @@ const Products = () => {
                 <Table.Cell className="p-4 md:table-cell">
                   <Checkbox className='checked:text-blue-600 focus:ring-blue-300 dark:focus:ring-blue-600' />
                 </Table.Cell>
-                <Table.Cell className="flex w-full justify-between text-xl md:table-cell md:whitespace-nowrap font-medium text-blue-600 dark:text-blue-400 md:dark:text-white">
+                <Table.Cell className="flex w-full justify-between text-xl md:text-base md:table-cell md:whitespace-nowrap font-medium text-blue-600 dark:text-blue-400 md:dark:text-white">
                   {/* title in mobile */}
                   {/* <span className='font-bold capitalize dark:text-white'>
                     Product name
@@ -160,32 +164,7 @@ const Products = () => {
               </Table.Row> */}
             </Table.Body>
           </Table>
-          <nav className="flex  w-full items-center flex-column flex-wrap md:flex-row justify-between pt-4" aria-label="Table navigation">
-            <span className="text-sm font-normal text-gray-500 dark:text-gray-400 mb-4 md:mb-0 block w-full md:inline md:w-auto">Showing <span className="font-semibold text-gray-900 dark:text-white">1-10</span> of <span className="font-semibold text-gray-900 dark:text-white">1000</span></span>
-            <ul className="inline-flex -space-x-px rtl:space-x-reverse text-sm h-8">
-                <li>
-                  <a href="#" className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
-                </li>
-                <li>
-                  <a href="#" className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
-                </li>
-                <li>
-                  <a href="#" className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
-                </li>
-                <li>
-                  <a href="#" aria-current="page" className="flex items-center justify-center px-3 h-8 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
-                </li>
-                <li>
-                  <a href="#" className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">4</a>
-                </li>
-                <li>
-                  <a href="#" className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">5</a>
-                </li>
-                <li>
-                  <a href="#" className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
-                </li>
-            </ul>
-          </nav>
+          <DashboardPagination current={1} total={10} onPageClick={handlePageClick} />
         </div>
       </div>
     </div>

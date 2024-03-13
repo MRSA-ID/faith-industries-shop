@@ -1,19 +1,103 @@
 import dynamic from 'next/dynamic'
 import type { ReactElement } from 'react'
 import Head from 'next/head'
-import { Breadcrumb, Button, Checkbox, Table } from 'flowbite-react'
-import { HiHome, HiOutlinePlusSm, HiOutlineRefresh } from 'react-icons/hi'
+import { Breadcrumb, Button, Checkbox, Dropdown, Table } from 'flowbite-react'
+import { HiDotsHorizontal, HiHome, HiOutlinePencilAlt, HiOutlinePlusSm, HiOutlineRefresh, HiOutlineTrash } from 'react-icons/hi'
 import Link from 'next/link'
 import DashboardPagination from '@/components/dashboard/DashboardPagination'
+import DashboardTableRowProduct from '@/components/dashboard/DashboardTableRowProduct'
 // import DashboardLayout from '@/components/dashboard/DashboardLayout'
 const DashboardLayout = dynamic(() => import('@/components/dashboard/DashboardLayout'), { ssr: false })
+
+const dataProduct =[
+  {
+    id: 1,
+    name:'Fatalis Coach Varsity',
+    description:'PRE ORDER -40 Hari-',
+    price: 550000,
+    size: 'M',
+    stock: 5
+  },
+  {
+    id: 2,
+    name:'Fatalis Coach Varsity',
+    description:'PRE ORDER -40 Hari-',
+    price: 550000,
+    size: 'L',
+    stock: 2
+  },
+  {
+    id: 3,
+    name:'Fatalis Coach Varsity',
+    description:'PRE ORDER -40 Hari-',
+    price: 550000,
+    size: 'XL',
+    stock: 5
+  },
+  {
+    id: 4,
+    name:'Fatalis Coach Varsity',
+    description:'PRE ORDER -40 Hari-',
+    price: 550000,
+    size: 'XXL',
+    stock: 2
+  },
+  {
+    id: 5,
+    name:'Trick or Treath Crewneck Patch',
+    description:'PRE ORDER -40 Hari-',
+    price: 475000,
+    size: 'm',
+    stock: 11
+  },
+  {
+    id: 6,
+    name:'Trick or Treath Crewneck Patch',
+    description:'PRE ORDER -40 Hari-',
+    price: 475000,
+    size: 'L',
+    stock: 10
+  },
+  {
+    id: 7,
+    name:'Pirate Hunter Cardigan',
+    description:'Return / Komplain Produk',
+    price: 400000,
+    size: 'XL',
+    stock: 10
+  },
+  {
+    id: 8,
+    name:'Wolf Girl Tie Dye Tshirt',
+    description:'Return / Komplain Produk',
+    price: 200000,
+    size: 'M',
+    stock: 0
+  },
+  {
+    id: 9,
+    name:'Wolf Girl Tie Dye Tshirt',
+    description:'Return / Komplain Produk',
+    price: 200000,
+    size: 'L',
+    stock: 0
+  },
+  {
+    id: 10,
+    name:'Paw-Paw Reversible Puffer Jacket',
+    description:'PRE ORDER -(31 Hari)-',
+    price: 600000,
+    size: 'XXL',
+    stock: 2
+  },
+]
 
 const Products = () => {
   const handlePageClick = (page:number) => {
     console.log('page number:', page)
   }
   return (
-    <div className='w-full h-screen px-5 py-7 overflow-y-hidden'>
+    <div className='w-full h-full px-5 py-7 overflow-y-auto'>
       <Head>
         <title>Stock Product | FTH Product</title>
       </Head>
@@ -71,67 +155,28 @@ const Products = () => {
           </div>
 
         </div>
-        <div className="w-full">
-          <Table className='w-full px-20 relative mb-5' hoverable>
+        <div className="w-full ">
+          <Table className='w-full  px-20 relative mb-5' hoverable>
           {/* hidden md:table-row-group */}
             <Table.Head className='text-gray-500 hidden md:table-row-group' >
               <Table.HeadCell className="bg-gray-100 dark:bg-gray-700 p-4">
                 <Checkbox className='checked:text-blue-600 focus:ring-blue-300 dark:focus:ring-blue-600' />
               </Table.HeadCell>
               <Table.HeadCell className='bg-gray-100 dark:bg-gray-700'>Product name</Table.HeadCell>
-              <Table.HeadCell className='bg-gray-100 dark:bg-gray-700'>Color</Table.HeadCell>
-              <Table.HeadCell className='bg-gray-100 dark:bg-gray-700'>Category</Table.HeadCell>
-              <Table.HeadCell className='bg-gray-100 dark:bg-gray-700'>Price</Table.HeadCell>
+              <Table.HeadCell className='bg-gray-100 dark:bg-gray-700'>Description</Table.HeadCell>
+              <Table.HeadCell className='bg-gray-100 dark:bg-gray-700'>Price</Table.HeadCell> 
+              <Table.HeadCell className='bg-gray-100 dark:bg-gray-700'>Size</Table.HeadCell>
+              <Table.HeadCell className='bg-gray-100 dark:bg-gray-700'>Stock</Table.HeadCell>
               <Table.HeadCell className='bg-gray-100 dark:bg-gray-700'>
                 <span className="sr-only">Edit</span>
               </Table.HeadCell>
             </Table.Head>
             <Table.Body className="divide-y w-full ">
-              <Table.Row className="bg-white shadow-md md:shadow-none block mb-5 rounded-xl md:table-row dark:border-gray-700 dark:bg-gray-800">
-                <Table.Cell className="p-4 md:table-cell">
-                  <Checkbox className='checked:text-blue-600 focus:ring-blue-300 dark:focus:ring-blue-600' />
-                </Table.Cell>
-                <Table.Cell className="flex w-full justify-between text-xl md:text-base md:table-cell md:whitespace-nowrap font-medium text-blue-600 dark:text-blue-400 md:dark:text-white">
-                  {/* title in mobile */}
-                  {/* <span className='font-bold capitalize dark:text-white'>
-                    Product name
-                  </span> */}
-                  {'Apple MacBook Pro 17'}
-                </Table.Cell>
-                <Table.Cell className='flex justify-between md:table-cell'>
-                  <span className='font-bold capitalize dark:text-white md:hidden'>
-                    Color
-                  </span>
-                  <span className='pr-4'>
-                    Silver
-                  </span>
-                </Table.Cell>
-                <Table.Cell className='flex justify-between md:table-cell'>
-                  <span className='font-bold capitalize dark:text-white md:hidden'>
-                    Category
-                  </span>
-                  <span className='pr-4'>
-                    Laptop
-                  </span>
-                </Table.Cell>
-                <Table.Cell className='flex justify-between md:table-cell'>
-                  <span className='font-bold capitalize dark:text-white md:hidden'>
-                    price
-                  </span>
-                  <span className='pr-4'>
-                    $2999
-                  </span>
-                </Table.Cell>
-                <Table.Cell className='hidden md:inline-block'>
-                  <a href="#" className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
-                    Edit
-                  </a>
-                </Table.Cell>
-                
-                {/* <Table.Cell className='flex flex-col  text-gray-900 dark:text-white'>
-                  Product name
-                </Table.Cell> */}
-              </Table.Row>
+              {
+                dataProduct.map(product => (
+                  <DashboardTableRowProduct key={product.id} {...product}/>
+                ))
+              }
               {/* <Table.Row className="bg-white block md:table-row dark:border-gray-700 dark:bg-gray-800">
                 <Table.Cell className="p-4">
                   <Checkbox className='checked:text-blue-600 focus:ring-blue-300 dark:focus:ring-blue-600' />

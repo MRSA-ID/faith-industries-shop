@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
-import type { ReactElement } from 'react'
+import { useState, type ReactElement, useEffect } from 'react'
 import Head from 'next/head'
-import { Breadcrumb, Button, Checkbox, Dropdown, Table } from 'flowbite-react'
+import { Breadcrumb, Button, Checkbox, Dropdown, Spinner, Table } from 'flowbite-react'
 import { HiDotsHorizontal, HiHome, HiOutlinePencilAlt, HiOutlinePlusSm, HiOutlineRefresh, HiOutlineTrash } from 'react-icons/hi'
 import Link from 'next/link'
 import DashboardPagination from '@/components/dashboard/DashboardPagination'
@@ -9,95 +9,151 @@ import DashboardTableRowProduct from '@/components/dashboard/DashboardTableRowPr
 // import DashboardLayout from '@/components/dashboard/DashboardLayout'
 const DashboardLayout = dynamic(() => import('@/components/dashboard/DashboardLayout'), { ssr: false })
 
-const dataProduct =[
-  {
-    id: 1,
-    name:'Fatalis Coach Varsity',
-    description:'PRE ORDER -40 Hari-',
-    price: 550000,
-    size: 'M',
-    stock: 5
-  },
-  {
-    id: 2,
-    name:'Fatalis Coach Varsity',
-    description:'PRE ORDER -40 Hari-',
-    price: 550000,
-    size: 'L',
-    stock: 2
-  },
-  {
-    id: 3,
-    name:'Fatalis Coach Varsity',
-    description:'PRE ORDER -40 Hari-',
-    price: 550000,
-    size: 'XL',
-    stock: 5
-  },
-  {
-    id: 4,
-    name:'Fatalis Coach Varsity',
-    description:'PRE ORDER -40 Hari-',
-    price: 550000,
-    size: 'XXL',
-    stock: 2
-  },
-  {
-    id: 5,
-    name:'Trick or Treath Crewneck Patch',
-    description:'PRE ORDER -40 Hari-',
-    price: 475000,
-    size: 'm',
-    stock: 11
-  },
-  {
-    id: 6,
-    name:'Trick or Treath Crewneck Patch',
-    description:'PRE ORDER -40 Hari-',
-    price: 475000,
-    size: 'L',
-    stock: 10
-  },
-  {
-    id: 7,
-    name:'Pirate Hunter Cardigan',
-    description:'Return / Komplain Produk',
-    price: 400000,
-    size: 'XL',
-    stock: 10
-  },
-  {
-    id: 8,
-    name:'Wolf Girl Tie Dye Tshirt',
-    description:'Return / Komplain Produk',
-    price: 200000,
-    size: 'M',
-    stock: 0
-  },
-  {
-    id: 9,
-    name:'Wolf Girl Tie Dye Tshirt',
-    description:'Return / Komplain Produk',
-    price: 200000,
-    size: 'L',
-    stock: 0
-  },
-  {
-    id: 10,
-    name:'Paw-Paw Reversible Puffer Jacket',
-    description:'PRE ORDER -(31 Hari)-',
-    price: 600000,
-    size: 'XXL',
-    stock: 2
-  },
-]
 
 const Products = () => {
+  const [dataProduct, setDataProduct] = useState(
+    [
+      {
+        id: 1,
+        name:'Fatalis Coach Varsity',
+        description:'PRE ORDER -40 Hari-',
+        price: 550000,
+        size: 'M',
+        stock: 5
+      },
+      {
+        id: 2,
+        name:'Fatalis Coach Varsity',
+        description:'PRE ORDER -40 Hari-',
+        price: 550000,
+        size: 'L',
+        stock: 2
+      },
+      {
+        id: 3,
+        name:'Fatalis Coach Varsity',
+        description:'PRE ORDER -40 Hari-',
+        price: 550000,
+        size: 'XL',
+        stock: 5
+      },
+      {
+        id: 4,
+        name:'Fatalis Coach Varsity',
+        description:'PRE ORDER -40 Hari-',
+        price: 550000,
+        size: 'XXL',
+        stock: 2
+      },
+      {
+        id: 5,
+        name:'Trick or Treath Crewneck Patch',
+        description:'PRE ORDER -40 Hari-',
+        price: 475000,
+        size: 'm',
+        stock: 11
+      },
+      {
+        id: 6,
+        name:'Trick or Treath Crewneck Patch',
+        description:'PRE ORDER -40 Hari-',
+        price: 475000,
+        size: 'L',
+        stock: 10
+      },
+      {
+        id: 7,
+        name:'Pirate Hunter Cardigan',
+        description:'Return / Komplain Produk',
+        price: 400000,
+        size: 'XL',
+        stock: 10
+      },
+      {
+        id: 8,
+        name:'Wolf Girl Tie Dye Tshirt',
+        description:'Return / Komplain Produk',
+        price: 200000,
+        size: 'M',
+        stock: 0
+      },
+      {
+        id: 9,
+        name:'Wolf Girl Tie Dye Tshirt',
+        description:'Return / Komplain Produk',
+        price: 200000,
+        size: 'L',
+        stock: 0
+      },
+      {
+        id: 10,
+        name:'Paw-Paw Reversible Puffer Jacket',
+        description:'PRE ORDER -(31 Hari)-',
+        price: 600000,
+        size: 'XXL',
+        stock: 2
+      },
+    ]
+  )
+  const [loading, setLoading] = useState(true)
+  const dummyApiProduct = {
+    message: "success",
+    data: dataProduct,
+    current_page: 1,
+    first_page_url: "http://localhost:3000/dashboard/products?page=1",
+    from: 1,
+    last_page: 1,
+    last_page_url: "http://localhost:3000/dashboard/products?page=1",
+    links:[
+      {
+        url: null,
+        label: "&laquo; Previous",
+        active: false,
+      },
+      {
+        url: "http://localhost:3000/dashboard/products?page=1",
+        label: "1",
+        active: true
+      },
+      {
+        url: null,
+        label: "Next &raquo;",
+        active: false
+      }
+    ],
+    next_page_url: null,
+    path: "http://localhost:3000/dashboard/products",
+    per_page: 10,
+    prev_page_url: null,
+    to: 10,
+    total: 10
+  }
+
   const handlePageClick = (page:number) => {
     console.log('page number:', page)
   }
+
+  const _handleAddProduct = () => {
+    const newData = [...dataProduct, {
+      id: 11,
+      name:'Paw-Paw Reversible Puffer Jacket',
+      description:'PRE ORDER -(31 Hari)-',
+      price: 600000,
+      size: 'M',
+      stock: 10
+    }]
+    setDataProduct(newData)
+  }
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false)
+    }, 10000);
+  }, [])
+  
+
   return (
-    <div className='w-full h-full px-5 py-7 overflow-y-auto'>
+    <div className='w-full h-full min-h-screen px-5 py-7 overflow-y-auto'>
       <Head>
         <title>Stock Product | FTH Product</title>
       </Head>
@@ -148,7 +204,11 @@ const Products = () => {
               <HiOutlineRefresh className="mr-2 h-5 w-5" />
               Refresh
             </Button>
-            <Button color='blue' className='h-10 w-full md:w-auto'>
+            <Button 
+              color='blue' 
+              className='h-10 w-full md:w-auto'
+              onClick={() => _handleAddProduct()}
+            >
               <HiOutlinePlusSm className="mr-2 h-5 w-5" />
               Add product
             </Button>
@@ -171,45 +231,36 @@ const Products = () => {
                 <span className="sr-only">Edit</span>
               </Table.HeadCell>
             </Table.Head>
-            <Table.Body className="divide-y w-full ">
-              {
-                dataProduct.map(product => (
-                  <DashboardTableRowProduct key={product.id} {...product}/>
-                ))
-              }
-              {/* <Table.Row className="bg-white block md:table-row dark:border-gray-700 dark:bg-gray-800">
-                <Table.Cell className="p-4">
-                  <Checkbox className='checked:text-blue-600 focus:ring-blue-300 dark:focus:ring-blue-600' />
-                </Table.Cell>
-                <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                  Microsoft Surface Pro
-                </Table.Cell>
-                <Table.Cell>White</Table.Cell>
-                <Table.Cell>Laptop PC</Table.Cell>
-                <Table.Cell>$1999</Table.Cell>
-                <Table.Cell>
-                  <a href="#" className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
-                    Edit
-                  </a>
-                </Table.Cell>
-              </Table.Row>
-              <Table.Row className="bg-white block md:table-row dark:border-gray-700 dark:bg-gray-800">
-                <Table.Cell className="p-4">
-                  <Checkbox className='checked:text-blue-600 focus:ring-blue-300 dark:focus:ring-blue-600' />
-                </Table.Cell>
-                <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">Magic Mouse 2</Table.Cell>
-                <Table.Cell>Black</Table.Cell>
-                <Table.Cell>Accessories</Table.Cell>
-                <Table.Cell>$99</Table.Cell>
-                <Table.Cell>
-                  <a href="#" className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
-                    Edit
-                  </a>
-                </Table.Cell>
-              </Table.Row> */}
-            </Table.Body>
+            {
+              loading ? (
+                <Table.Body className='w-full h-full dark:bg-gray-600'>
+                  <Table.Row>
+                    <Table.Cell colSpan={7}>
+                      <div className='w-full flex justify-center'>
+                        <div className='py-40 dark:text-white'>
+                        <Spinner aria-label="Alternate spinner button example" size="md" className='fill-blue-600 dark:text-white' />
+                        <span className="pl-3">Loading...</span>
+                        </div>
+                      </div>
+                    </Table.Cell>
+                  </Table.Row>
+                </Table.Body>
+              ) : (
+              <Table.Body className="divide-y w-full ">
+                {
+                  dataProduct.map(product => (
+                    <DashboardTableRowProduct key={product.id} {...product}/>
+                  ))
+                }
+              </Table.Body>
+              )
+            }
           </Table>
-          <DashboardPagination current={1} total={10} onPageClick={handlePageClick} />
+          {
+            !loading && (
+              <DashboardPagination current={dummyApiProduct.current_page} total={dummyApiProduct.total} onPageClick={handlePageClick} />
+            )
+          }
         </div>
       </div>
     </div>
